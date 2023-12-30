@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
 
-const props = defineProps({
+defineProps({
   event: {
     type: Object,
     required: true
