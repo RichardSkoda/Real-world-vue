@@ -6,17 +6,19 @@
       :key="event.id"
       :event="event"
     />
+    <!-- Dodelat typ na data ze serveru do nove slozky types -->
 
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import EventService from '@/services/EventService.ts'
+import EventService from '@/services/EventService'
 import EventCard from '@/components/EventCard.vue'
+import type { Event } from '@/types/Event'
 
 
-const events = ref<Array<object> | undefined>(undefined)
+const events = ref<Array<Event> | undefined>(undefined)
 
 onMounted(async () => {
   try {
