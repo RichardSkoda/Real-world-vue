@@ -2,12 +2,10 @@
   <h1>Events for Goods</h1>
   <div class="events">
     <EventCard
-      v-for="event in events"
-      :key="event.id"
-      :event="event"
+    v-for="event in events"
+    :key="event.id"
+    :event="event"
     />
-    <!-- Dodelat typ na data ze serveru do nove slozky types -->
-
   </div>
 </template>
 
