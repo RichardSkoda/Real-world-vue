@@ -15,12 +15,18 @@ import EventService from '@/services/EventService'
 import EventCard from '@/components/EventCard.vue'
 import type { Event } from '@/types/Event'
 
+const props = defineProps({
+  page: {
+    type: Number,
+    required: true
+  }
+})
 
 const events = ref<Array<Event> | undefined>(undefined)
 
 onMounted(async () => {
   try {
-    const serverData = await EventService.getEvents()
+    const serverData = await EventService.getEvents(2, props.page)
     events.value = serverData.data
     console.log(events.value)
   } catch (error) {
