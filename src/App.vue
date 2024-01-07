@@ -3,8 +3,8 @@
     <header>
       <div class="wrapper">
         <nav>
-          <RouterLink :to="{name: 'event-list'}">Events</RouterLink> |
-          <RouterLink :to="{name: 'about'}">About</RouterLink>
+          <router-link :to="{name: 'event-list'}">Events</router-link> |
+          <router-link :to="{name: 'about'}">About</router-link>
         </nav>
       </div>
     </header>
@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+
 </script>
 
 <style>
