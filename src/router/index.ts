@@ -16,12 +16,13 @@ const router = createRouter({
       props: route => ({page: parseInt(route.query.page as string) || 1})
     },
     {
-      path: '/about',
+      path: '/about-us',
       name: 'about',
-      component: AboutView
+      component: AboutView,
+      alias: '/about'
     },
     {
-      path: '/event/:id',
+      path: '/events/:id',
       name: 'event-layout',
       props: true,
       component: EventLayout,
@@ -42,7 +43,26 @@ const router = createRouter({
           component: EventEdit
         }
       ]
-    }
+    },
+    // REDIRECT WITH WILD CARD
+    {
+      path: '/event/:afterEvent(.*)',
+      redirect: to => {
+        return { path: '/events/' + to.params.afterEvent }
+      }
+    },
+
+    // REDIRECT WITH CHIDREN
+    // {
+    //   path: '/event/:id',
+    //   redirect: () => {
+    //     return {name: 'event-details'}
+    //   },
+    //   children: [
+    //     {path: 'register', redirect: () => ({name: 'event-register'})},
+    //     {path: 'edit', redirect: () => ({name: 'event-edit'})}
+    //   ]
+    // }
   ]
 })
 
