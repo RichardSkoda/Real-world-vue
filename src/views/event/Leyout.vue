@@ -31,7 +31,7 @@ const event = ref<Event | null>(null)
 onMounted( async () => {
   try {
     const serverData = await EventService.getEvent(props.id)
-  event.value = serverData.data
+    event.value = serverData.data
   } catch (error) {
     console.log('Cant get event', error)
   }
