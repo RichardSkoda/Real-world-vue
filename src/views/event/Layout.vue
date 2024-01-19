@@ -17,6 +17,7 @@
 import { onMounted, ref } from 'vue'
 import EventService from '@/services/EventService';
 import type { Event } from '@/types/Event'
+import router from '@/router';
 
 const props = defineProps({
   id: {
@@ -32,8 +33,10 @@ onMounted( async () => {
   try {
     const serverData = await EventService.getEvent(props.id)
     event.value = serverData.data
-  } catch (error) {
-    console.log('Cant get event', error)
+  } catch (error: any) {
+    if(error.response && error.response.status === 404) {
+      router.push({name: '404Resource', params: {resource: 'event'}})
+    } else router.push({name: 'network-error'})
   }
 })
 

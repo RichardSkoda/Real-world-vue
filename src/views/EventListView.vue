@@ -30,6 +30,7 @@ import { ref, onMounted, watchEffect, computed } from 'vue'
 import EventService from '@/services/EventService'
 import EventCard from '@/components/EventCard.vue'
 import type { Event } from '@/types/Event'
+import router from '@/router';
 
 const props = defineProps({
   page: {
@@ -54,7 +55,7 @@ onMounted(() => {
       events.value = serverData.data
       console.log(events.value)
     } catch (error) {
-      console.log(error)
+      router.push({name: 'network-error'})
     }
   })
 
