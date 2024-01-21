@@ -1,3 +1,4 @@
+import { inject } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import EventListView from '../views/EventListView.vue'
 import AboutView from '@/views/AboutView.vue'
@@ -7,6 +8,9 @@ import EventRegister from '@/views/event/Register.vue'
 import EventEdit from '@/views/event/Edit.vue'
 import NotFound from '@/views/NotFound.vue'
 import NetworkError from '@/views/NetworkError.vue'
+import type InjectItem from '@/types/InjectItem'
+
+const GStore: InjectItem = inject('GStore') ?? {flashMessage: 'Something went wrong!'}
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -58,7 +62,8 @@ const router = createRouter({
         {
           path: 'edit',
           name: 'event-edit',
-          component: EventEdit
+          component: EventEdit,
+          meta: {requireAuth: true}
         }
       ]
     },
@@ -83,5 +88,26 @@ const router = createRouter({
     // }
   ]
 })
+
+
+
+router.beforeEach((to, from) => {
+
+  const notAuthorized = true
+  if (to.meta.requireAuth && notAuthorized) {
+    //does not show the flashMessage, dont know why
+    GStore.flashMessage = 'Sorry, you are not authorized to view this page'
+    setTimeout(() => {
+      GStore.flashMessage = ''
+    }, 3000)
+
+    if (from.href) { // <--- If this navigation came from a previous page.
+      return false
+    } else {  // <--- Must be navigating directly
+      return { path: '/' }  // <--- Push navigation to the root route.
+    }
+  }
+})
+
 
 export default router
