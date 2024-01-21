@@ -1,5 +1,8 @@
 <template>
   <div id="layout">
+    <div id="flashMessage" v-if="GStore.flashMessage">
+      {{ GStore.flashMessage }}
+    </div>
     <header>
       <div class="wrapper">
         <nav>
@@ -13,6 +16,10 @@
 </template>
 
 <script setup lang="ts">
+import { inject } from 'vue'
+import type InjectItem from './types/InjectItem';
+
+const GStore: InjectItem = inject('GStore') ?? {flashMessage: 'Something went wrong!'}
 
 </script>
 
@@ -37,6 +44,20 @@ nav a.router-link-exact-active {
 
 h2 {
   font-size: 20px;
+}
+
+@keyframes yellowfade {
+  from {
+    background: yellow;
+  }
+  to {
+    background: transparent;
+  }
+}
+
+#flashMessage {
+  animation-name: yellowfade;
+  animation-duration: 3s;
 }
 
 </style>

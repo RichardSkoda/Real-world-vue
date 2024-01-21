@@ -16,7 +16,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import EventService from '@/services/EventService';
-import type { Event } from '@/types/Event'
+import type Event from '@/types/Event'
 import router from '@/router';
 
 const props = defineProps({
