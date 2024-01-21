@@ -14,6 +14,11 @@ const GStore: InjectItem = inject('GStore') ?? {flashMessage: 'Something went wr
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
+  scrollBehavior (to, from, savedPosition) {
+    if(savedPosition) {
+      return savedPosition // does not work, it go back to top of previous 'page'
+    }else return {top: 0} // always scroll to top
+  },
   routes: [
     {
       path: '/',

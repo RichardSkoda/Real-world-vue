@@ -42,7 +42,7 @@ const props = defineProps({
 const events = ref<Array<Event> | null>(null)
 const totalEvents = ref(0)
 const hasNextPage = computed(() => {
-  const totalPages = Math.ceil(totalEvents.value / 2)
+  const totalPages = Math.ceil(totalEvents.value / 3)
   return props.page < totalPages
 })
 
@@ -50,7 +50,7 @@ onMounted(() => {
   watchEffect( async () => {
     events.value = null
     try {
-      const serverData = await EventService.getEvents(2, props.page)
+      const serverData = await EventService.getEvents(3, props.page)
       totalEvents.value = serverData.headers['x-total-count']
       events.value = serverData.data
       console.log(events.value)
